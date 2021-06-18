@@ -1,24 +1,20 @@
 ---
 - hosts: tac-group
   become: yes
+  become_user: root
+  become_method: sudo
+  remote_user: user1
   roles:
-      - java
-      - talend-repo
-      - tomcat
-      - kafka
-      - mongodb
-      - jobserver
-      - tac
-      - amc
-      - filebeat
-      - iam
-      - nexus
-      - repo-mgr
-      - mdm
-      - mwfl
-      - runtime
-      - sap-rfc-server
-      - tcomp
-      - sjs
-      - streamsrunner
-      - tdp
+    - java
+    - talend-repo
+    - tomcat
+    - tac
+    - amc
+    - iam
+  vars:
+    # TAC variables
+    - tac_setup_jobserver: "no"
+    - tac_use_logserver: "no"
+    # IAM variables
+    - iam_hostname: "tac-host.localnet"
+    - iam_mdm_postlogout_url: "http://mdm-host.localnet:8180/"
